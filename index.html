@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>你的属性最符合KPL中的哪个选手 - 趣味测试</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;overflow-x:hidden}
+body{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 30%,#1a1a2e 50%,#2d1b3d 70%,#1e1a2a 100%);background-attachment:fixed;position:relative}
+body::before{content:'';position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse 600px 400px at 10% 20%,rgba(255,181,194,0.08) 0%,transparent 70%),radial-gradient(ellipse 500px 500px at 85% 30%,rgba(201,177,255,0.08) 0%,transparent 70%),radial-gradient(ellipse 400px 600px at 50% 80%,rgba(181,234,215,0.06) 0%,transparent 70%),radial-gradient(ellipse 300px 300px at 20% 70%,rgba(255,218,193,0.07) 0%,transparent 70%),radial-gradient(ellipse 400px 400px at 75% 75%,rgba(181,216,235,0.06) 0%,transparent 70%);pointer-events:none}
+.bg-orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(60px);opacity:.12;animation:orbFloat 12s ease-in-out infinite alternate}
+.bg-orb:nth-child(1){width:280px;height:280px;top:5%;left:8%;background:#FFB5C2;animation-delay:0s}
+.bg-orb:nth-child(2){width:240px;height:240px;top:60%;right:5%;background:#C9B1FF;animation-delay:3s}
+.bg-orb:nth-child(3){width:200px;height:200px;bottom:10%;left:15%;background:#B5EAD7;animation-delay:6s}
+.bg-orb:nth-child(4){width:260px;height:260px;top:25%;right:20%;background:#FFDAC1;animation-delay:9s}
+.bg-orb:nth-child(5){width:180px;height:180px;top:75%;left:60%;background:#B5D8EB;animation-delay:2s}
+@keyframes orbFloat{0%{transform:translate(0,0) scale(1)}100%{transform:translate(30px,-20px) scale(1.1)}}
+.glass{background:rgba(255,255,255,.06);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.12);border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.app-wrapper{position:relative;z-index:1;max-width:640px;margin:0 auto;min-height:100vh;padding:20px 16px 80px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.page{display:none;width:100%}.page.active{display:flex;flex-direction:column;align-items:center}
+/* 页脚 */
+.footer-disclaimer{position:fixed;bottom:0;left:0;right:0;z-index:100;text-align:center;padding:12px 16px;font-size:12px;color:rgba(255,215,0,.45);background:linear-gradient(transparent,rgba(26,26,46,.85) 40%);letter-spacing:1px;pointer-events:none}
+.footer-disclaimer::before{content:"⚠️ "}
+/* 颜色 */
+:root{--gold:#FFD700;--gold-light:#FFE44D;--gold-dark:#C5A600;--gold-glow:rgba(255,215,0,.3);--text-primary:#f0e6d3;--text-secondary:rgba(240,230,211,.7);--pink:#FFB5C2;--lavender:#C9B1FF;--mint:#B5EAD7;--peach:#FFDAC1;--blue:#B5D8EB}
+/* 第1页：开始 */
+#page-start .hero-icon{font-size:72px;margin-bottom:8px;animation:heroBounce 2s ease-in-out infinite}
+@keyframes heroBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+#page-start h1{font-size:36px;font-weight:800;color:var(--gold);text-align:center;text-shadow:0 0 40px var(--gold-glow);margin-bottom:12px;line-height:1.3}
+#page-start .subtitle{font-size:15px;color:var(--text-secondary);text-align:center;margin-bottom:10px;line-height:1.6}
+#page-start .info-card{width:100%;padding:20px 24px;margin:16px 0 28px}
+#page-start .info-card p{color:var(--text-secondary);font-size:13px;line-height:1.8;text-align:center}
+#page-start .info-card p span{color:var(--gold);font-weight:600}
+.btn-start{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#1a1a2e;font-size:20px;font-weight:700;cursor:pointer;transition:all .3s;box-shadow:0 4px 24px var(--gold-glow)}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 8px 32px var(--gold-glow)}
+.btn-start:active{transform:translateY(0)}
+/* 第2页：答题 */
+.progress-wrapper{width:100%;margin-bottom:24px}
+.progress-info{display:flex;justify-content:space-between;font-size:13px;color:var(--text-secondary);margin-bottom:8px}
+.progress-info span:last-child{color:var(--gold);font-weight:600}
+.progress-bar-bg{width:100%;height:6px;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden}
+.progress-bar-fill{height:100%;width:0%;border-radius:3px;background:linear-gradient(90deg,var(--gold-dark),var(--gold),var(--gold-light));transition:width .5s ease}
+.question-card{width:100%;padding:28px 24px;animation:fadeSlideIn .6s ease}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.question-number{font-size:13px;color:var(--gold);font-weight:600;margin-bottom:12px;letter-spacing:1px}
+.question-text{font-size:18px;color:var(--text-primary);font-weight:600;margin-bottom:20px;line-height:1.6}
+.options-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.option-item{padding:14px 18px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--text-primary);font-size:14px;cursor:pointer;transition:all .25s;display:flex;align-items:center;gap:12px}
+.option-item .option-label{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:rgba(255,215,0,.12);color:var(--gold);font-weight:700;font-size:13px;flex-shrink:0}
+.option-item:hover{background:rgba(255,215,0,.08);border-color:rgba(255,215,0,.25);transform:translateX(4px)}
+.option-item.selected{background:rgba(255,215,0,.12);border-color:var(--gold);box-shadow:0 0 16px var(--gold-glow)}
+/* 第3页：结果 */
+.result-card{width:100%;padding:32px 24px;text-align:center;animation:fadeSlideIn .8s ease}
+.result-emoji{font-size:72px;margin-bottom:4px}
+.result-player{font-size:36px;font-weight:800;color:var(--gold);text-shadow:0 0 40px var(--gold-glow);margin-bottom:2px}
+.result-label{font-size:14px;color:var(--text-secondary);margin-bottom:12px}
+.result-title{font-size:20px;font-weight:700;color:var(--text-primary);margin-bottom:12px}
+.result-desc{font-size:14px;color:var(--text-secondary);line-height:1.8;text-align:left;margin-bottom:16px;padding:16px 18px;border-radius:12px;background:rgba(255,255,255,.03);border-left:3px solid var(--gold)}
+.result-score{font-size:14px;color:var(--text-secondary);margin-bottom:20px}
+.result-score strong{color:var(--gold);font-size:18px}
+.btn-restart{display:inline-flex;align-items:center;gap:8px;padding:12px 32px;border:2px solid var(--gold);border-radius:50px;background:transparent;color:var(--gold);font-size:15px;font-weight:600;cursor:pointer;transition:all .25s;margin-top:4px}
+.btn-restart:hover{background:rgba(255,215,0,.1);transform:translateY(-2px)}
+.btn-share{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border:1px solid rgba(255,215,0,.3);border-radius:50px;background:rgba(255,215,0,.06);color:var(--text-secondary);font-size:13px;cursor:pointer;transition:all .25s;margin-top:8px}
+.btn-share:hover{background:rgba(255,215,0,.1);color:var(--gold)}
+/* 五维分析 */
+.analysis-section{width:100%;margin-top:20px;padding:24px;animation:fadeSlideIn 1s ease}
+.analysis-section h3{color:var(--gold);font-size:17px;margin-bottom:16px;text-align:center}
+.analysis-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;margin-bottom:10px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+.analysis-item .dim-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+.analysis-item .dim-content{flex:1}
+.analysis-item .dim-name{font-size:13px;color:var(--gold);font-weight:600;margin-bottom:3px}
+.analysis-item .dim-text{font-size:13px;color:var(--text-secondary);line-height:1.6}
+/* 飘落庆祝 */
+.confetti-container{position:fixed;inset:0;z-index:200;pointer-events:none;overflow:hidden}
+.confetti-piece{position:absolute;top:-40px;font-size:22px;animation:confettiFall linear forwards;opacity:.85}
+@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg) scale(1);opacity:.9}80%{opacity:.7}100%{transform:translateY(105vh) rotate(720deg) scale(.4);opacity:0}}
+/* 密匙输入 */
+.secret-key-area{width:100%;margin:-8px 0 20px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.secret-key-area label{font-size:13px;color:var(--text-secondary);letter-spacing:.5px}
+.secret-key-area .key-input-wrapper{display:flex;align-items:center;gap:8px;width:100%;max-width:280px}
+.secret-key-area input[type="password"]{flex:1;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,215,0,.2);background:rgba(255,255,255,.06);color:var(--text-primary);font-size:14px;outline:none;transition:border-color .25s}
+.secret-key-area input[type="password"]:focus{border-color:var(--gold);box-shadow:0 0 12px var(--gold-glow)}
+.secret-key-area input[type="password"]::placeholder{color:rgba(255,255,255,.2)}
+.secret-key-area .key-error{font-size:12px;color:#FF6B6B;min-height:18px;transition:opacity .3s;opacity:0}
+.secret-key-area .key-error.show{opacity:1}
+/* 响应式 */
+@media(max-width:480px){.app-wrapper{padding:16px 12px 80px}#page-start h1{font-size:28px}.question-text{font-size:16px}.option-item{padding:12px 14px;font-size:13px}.result-player{font-size:30px}.result-emoji{font-size:56px}.btn-start{padding:14px 36px;font-size:17px}.analysis-item{padding:10px 12px}}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,215,0,.2);border-radius:2px}
+</style>
+</head>
+<body>
+<div class="bg-orb"></div><div class="bg-orb"></div><div class="bg-orb"></div><div class="bg-orb"></div><div class="bg-orb"></div>
+<div class="app-wrapper" id="app">
+
+  <!-- === 第1页：开始 === -->
+  <div class="page active" id="page-start">
+    <div class="hero-icon">⚡</div>
+    <h1 id="test-title">你的属性最符合KPL<br>中的哪个选手</h1>
+    <p class="subtitle" id="test-subtitle">45道题测出你和哪位KPL选手最像</p>
+    <div class="glass info-card">
+      <p>📋 共 <span id="info-total-q">45</span> 题 · 含游戏风格、KPL梗、经典场面<br>
+      ⏱ 约 <span>3-5</span> 分钟 · 结果仅供参考</p>
+    </div>
+    <button class="btn-start" id="btn-start-q">开始测试 🎮</button>
+  </div>
+
+  <!-- === 第2页：答题 === -->
+  <div class="page" id="page-quiz">
+    <div class="progress-wrapper">
+      <div class="progress-info">
+        <span id="progress-label">第 1 / 45 题</span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+    </div>
+    <div class="glass question-card" id="question-card">
+      <div class="question-number" id="q-number">第 1 题</div>
+      <div class="question-text" id="q-text">加载中...</div>
+      <ul class="options-list" id="q-options"></ul>
+    </div>
+  </div>
+
+  <!-- === 第3页：结果 === -->
+  <div class="page" id="page-result">
+    <div class="glass result-card" id="result-card">
+      <div class="result-emoji" id="r-emoji">🏆</div>
+      <div class="result-player" id="r-player">花海</div>
+      <div class="result-label">你的KPL分身 🎯</div>
+      <div class="result-title" id="r-title">野区霸主</div>
+      <div class="result-desc" id="r-desc">描述加载中...</div>
+      <div class="result-score">契合度 <strong id="r-score">0</strong> / 40 · <span id="r-tier-label">T1</span></div>
+      <button class="btn-restart" id="btn-restart-q">🔄 重新测试</button>
+      <button class="btn-share" id="btn-share-q">📤 分享结果</button>
+    </div>
+    <div class="glass analysis-section" id="analysis-section">
+      <h3>🔍 五维分析：为什么是这个选手</h3>
+      <div id="analysis-list"></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer-disclaimer">仅供娱乐参考</div>
+
+<script>
+/* ===============================================================
+   动态数据管理区 —— 仅修改变量即可复用
+   =============================================================== */
+
+/* ----- 测试元信息 ----- */
+const TEST_TITLE   = '你的属性最符合KPL中的哪个选手';
+const TEST_SUBTITLE = '45道题测出你和哪位KPL选手最像';
+
+/* ----- 结果档位（归一化 0-40 → 12 档）----- */
+const RESULT_TIERS = [
+  { min:0, max:3,  emoji:'🛡️', player:'坦然',    title:'边路铁壁 · 坦然',
+    desc:'你的属性最接近「坦然」——对抗路的定海神针，稳重中隐藏杀机。你抗压能力一流，擅长在逆风中找机会。就像坦然在Hero扛起团队的表现，你是队伍里最让人安心的存在。',
+    analyses:[
+      ['🎮','游戏风格','你稳扎稳打从不冒进，和坦然一样擅长抗压找机会。你对线稳如泰山，打团目标明确——切后排。'],
+      ['🧠','战术理解','你精通边线运营和拉扯。知道什么时候带线什么时候参团，优先级判断精准。'],
+      ['💪','心态素质','逆风不慌、顺风不浪。你有大将之风，坦然在Hero扛起团队的表现就是你的写照。'],
+      ['🤝','团队协作','你是队伍的守护者，愿意默默承受压力为队友创造空间。坦然的坦边之道就是你的信条。'],
+      ['📈','成长轨迹','从eStar替补到Hero核心，你证明了厚积薄发的力量。实力派永远不会被埋没。'],
+    ]},
+  { min:4, max:6,  emoji:'🌊', player:'清清',    title:'通天边路 · 清清',
+    desc:'你的属性最接近「清清」——被称为"通天边路"的顶级对抗路选手。你对线压制力极强，操作细腻且有创造力。就像清清在广州TTG的亮眼表现，你总是能在线上打出优势，然后把优势辐射到全局。',
+    analyses:[
+      ['🎮','游戏风格','你对线压制力极强，擅长在线上打穿对手。和清清一样，你相信"打穿一路就能赢比赛"。'],
+      ['🧠','战术理解','你精通单带牵制和分推战术。知道什么时候该带哪条线，总能让对手在兵线上疲于奔命。'],
+      ['💪','心态素质','你对线期充满自信，敢打敢拼。清清之所以被称为"通天边路"，靠的就是这份舍我其谁的霸气。'],
+      ['🤝','团队协作','你虽然是边路但懂的支援时机。关键时刻传送到位，用个人优势带动团队节奏。'],
+      ['📈','成长轨迹','你的成长说明了一个道理：真正的高手都是在线上打出来的。清清从TTG到新东家的故事说明，强者到哪里都是核心。'],
+    ]},
+  { min:7, max:9,  emoji:'🌱', player:'长生',    title:'中流砥柱 · 长生',
+    desc:'你的属性最接近「长生」——AG超玩会新一代中核。你的打法沉稳中带锋芒，是队伍里最可靠的中路屏障。就像长生在AG的稳健发挥，你也许不是最耀眼的那一个，但一定是队伍里最不可或缺的那一环。',
+    analyses:[
+      ['🎮','游戏风格','你打法稳健，对线不落下风，支援及时到位。和长生一样，你是那种"不犯错就是最好的发挥"的选手。'],
+      ['🧠','战术理解','你对兵线和游走时机有精准的判断。长生在AG的中路之所以让人放心，就在于他的节奏感。'],
+      ['💪','心态素质','你情绪稳定，不会因为逆风而慌乱。长生的可贵之处就在于无论顺风逆风都能保持高水准。'],
+      ['🤝','团队协作','你是团队的中场调度师，和长生一样擅长发动节奏。你懂得什么时候该打什么时候该撤。'],
+      ['📈','成长轨迹','你的成长路径是循序渐进的——从不被看好到队伍核心。长生在AG的崛起证明，坚持总会被看见。'],
+    ]},
+  { min:10,max:13, emoji:'🎯', player:'钎城',    title:'稳定发育路 · 钎城',
+    desc:'你的属性最接近「钎城」——发育路上的稳定输出机器。你不需要花哨的操作，只需要在最正确的时间打出最多的伤害。就像钎城在每一场比赛中的稳定发挥，你是那种队友可以放心把后期托付给你的人。',
+    analyses:[
+      ['🎮','游戏风格','你注重发育和输出效率，不追求极限操作但追求稳定输出。和钎城一样，你的团战输出总能拉满。'],
+      ['🧠','战术理解','你精通走位和团战站位，总能在安全的输出位置打出最大伤害。钎城的团战站位一直是射手的教科书。'],
+      ['💪','心态素质','你有极强的耐心，不会被对手的挑衅干扰。钎城的扎实风格说明，射手最需要的是沉着和耐心。'],
+      ['🤝','团队协作','你信任队友的保护，也值得队友信任。你和钎城一样，是团队在后期最可靠的那个核心。'],
+      ['📈','成长轨迹','你的成长路径——稳扎稳打，一步一个脚印。钎城的职业生涯告诉你，射手之道不在秀而在稳。'],
+    ]},
+  { min:14,max:16, emoji:'💫', player:'钟意',    title:'新生代打野 · 钟意',
+    desc:'你的属性最接近「钟意」——AG超玩会新生代野王。你的打法充满灵性和创造力，总能用意想不到的方式打开局面。就像钟意在AG的惊艳表现，你是那种让对手防不胜防的节奏发动机。',
+    analyses:[
+      ['🎮','游戏风格','你的打野节奏灵性十足，不走寻常路。和钟意一样，你总能在对手意想不到的地方出现。'],
+      ['🧠','战术理解','你对地图和视野有独到的理解。钟意的可怕之处就在于他能从"不可能"的位置发起Gank。'],
+      ['💪','心态素质','你敢于尝试非主流打法，不怕背锅。钟意的创造力正是来自这种"敢打敢秀"的心理素质。'],
+      ['🤝','团队协作','你虽然是核心位但从不独狼。钟意在AG的打法说明，最好的打野是让全队都舒服的打野。'],
+      ['📈','成长轨迹','新生代就要有新气象。钟意从默默无闻到AG首发的故事，说明天赋加上机会就能发光。'],
+    ]},
+  { min:17,max:19, emoji:'🦊', player:'九尾',    title:'法刺天才 · 九尾',
+    desc:'你的属性最接近「九尾」——KPL最具灵性的中单之一，法刺的代表人物。你的操作行云流水，敢打敢秀，是团队里最亮眼的存在。就像九尾从TTG到LGD的法刺传奇，你的比赛永远不缺乏高光时刻。',
+    analyses:[
+      ['🎮','游戏风格','你打法极具观赏性，擅长法刺类英雄。和九尾一样，你的操作华丽而致命，是集锦里的常客。'],
+      ['🧠','战术理解','你精通切入时机和伤害计算。九尾的每一个"尾子名场面"背后都是精确的血量计算和时机把握。'],
+      ['💪','心态素质','你有极强的表现欲，大场面从来不怂。九尾之所以能打出那么多名场面，靠的就是这颗"大心脏"。'],
+      ['🤝','团队协作','你虽然是操作型选手但懂得配合。九尾从TTG到LGD的历程说明，法刺也要为团队服务。'],
+      ['📈','成长轨迹','你的天赋毋庸置疑，但你也懂得天赋需要赛场打磨。九尾的职业生涯说明了天才也要经过逆境的淬炼。'],
+    ]},
+  { min:20,max:22, emoji:'⭐', player:'一诺',    title:'天才射手 · 一诺',
+    desc:'你的属性最接近「一诺」——KPL最具天赋的射手，"一诺千金"和"一诺犯病"都写在你的DNA里。你的上限极高，但偶尔也会上头。就像一诺在AG的每一场比赛，你可以秀翻全场也可以送得离谱，但永远充满观赏性。',
+    analyses:[
+      ['🎮','游戏风格','你的操作上限极高，敢打别人不敢打的团。和一诺一样，你是那种"要么秀翻要么送翻"的选手。'],
+      ['🧠','战术理解','你对伤害和位置有敏锐的直觉。一诺的"千金"名场面说明，他的直觉在大多数时候都是对的。'],
+      ['💪','心态素质','你自信到有些狂妄，但这种自信正是你创造奇迹的源动力。一诺的"犯病"和"千金"其实是一体两面。'],
+      ['🤝','团队协作','你在AG是绝对的核心，但你也在学着信任队友。一诺近年来的成长就是学会了"不孤军奋战"。'],
+      ['📈','成长轨迹','你的职业生涯大起大落，但从未被打倒。一诺从AG26连败到重回巅峰的故事，就是最好的励志教材。'],
+    ]},
+  { min:23,max:25, emoji:'🗡️', player:'无畏',    title:'野王 · 无畏',
+    desc:'你的属性最接近「无畏」——KPL顶尖打野之一，以凶悍的野区入侵和极致的操作著称。你的打法极具侵略性，每分每秒都在给对手施压。就像无畏在Hero时期的统治力，你是那种让对手在BP阶段就心颤的选手。',
+    analyses:[
+      ['🎮','游戏风格','你的野区入侵凶狠至极，从不给对手喘息的机会。和无畏一样，你相信"最好的防守就是进攻"。'],
+      ['🧠','战术理解','你对打野位的节奏把控炉火纯青。无畏的恐怖之处在于他总能在对的时间做对的事。'],
+      ['💪','心态素质','你有一颗永不言败的心，越是逆风越敢打。无畏的名字就说明了一切——勇者无畏。'],
+      ['🤝','团队协作','你是队伍的灵魂人物，能带动全队的节奏。无畏在Hero时期的指挥能力证明了他不只是操作怪。'],
+      ['📈','成长轨迹','你的职业生涯充满高光时刻，但你也经历过低谷。无畏的经历告诉你，真正的强者是在跌倒了还能站起来的那个。'],
+    ]},
+  { min:26,max:28, emoji:'🧙', player:'清融',    title:'中路魔术师 · 清融',
+    desc:'你的属性最接近「清融」——KPL中单天花板，以极致的操作和冷静的控场著称。你的游戏风格偏稳健掌控全局，不爱冒险但关键时候从不手软。就像清融从eStar到JDG的转型，你也在不断突破自己的舒适区。',
+    analyses:[
+      ['🎮','游戏风格','你打法稳健、控场能力强，和清融一样擅长中后期运营。你不追求个人秀，而是让对手不知不觉掉入你的节奏。'],
+      ['🧠','战术理解','你对比赛理解很深，像清融一样能快速阅读战场形势。你的决策往往建立在信息充分分析之上。'],
+      ['💪','心态素质','你情绪稳定，逆风不慌，这是清融的标志性特质。越是高压局面你越冷静，这是顶级选手的心理素质。'],
+      ['🤝','团队协作','你注重团队配合，愿意牺牲个人数据换取团队胜利。清融在JDG的角色转变也体现了这种团队优先的思维。'],
+      ['📈','成长轨迹','你和清融一样，靠的是持续的积累而非一时的天赋。每一步都走得扎实，最终成为队伍里最可靠的那个核心。'],
+    ]},
+  { min:29,max:31, emoji:'🔥', player:'小胖',    title:'狂傲天才 · 小胖',
+    desc:'你的属性最接近「小胖」——那个让全网喊"无限猖狂"的男人。你的打法天马行空、不讲道理，操作的极限就是你的下限。从狼队到TTG，你的自信始终如一。别人觉得你狂，但你知道——猖狂的底气来自硬实力。',
+    analyses:[
+      ['🎮','游戏风格','你的打法是"唯我独尊"，和小胖一样敢打别人不敢打的团。你的操作自信已经到了"这把我要一打五"的境界。'],
+      ['🧠','战术理解','你表面上莽撞，实际上有精巧的计算。小胖看似"无限猖狂"的每一波操作背后都是精确的血量和技能计算。'],
+      ['💪','心态素质','你有一颗大心脏，越大的场面越兴奋。小胖能在总决赛上打出名场面，靠的就是"老子天下第一"的心理素质。'],
+      ['🤝','团队协作','你在团队里是绝对核心，队友也愿意围着你打。但小胖用冠军证明，最狂的人往往也最懂得相信队友。'],
+      ['📈','成长轨迹','从被人质疑到用冠军打脸。从"胖皇"到"小胖"再到"胖大将军"，你和他一样让质疑者闭嘴。'],
+    ]},
+  { min:32,max:35, emoji:'🐯', player:'花海',    title:'野区霸主 · 花海',
+    desc:'你的属性最接近「花海」——KPL顶级打野，eStar王朝的节奏发动机。你的打法凶悍激进，掌控野区就是掌控比赛。就像花海在eStar的统治级表现，你一旦拿到节奏就不会给对手任何喘息的机会。',
+    analyses:[
+      ['🎮','游戏风格','你进攻欲望极强，像花海一样每分钟都在施压。你的野区入侵节奏凶悍，一旦领先就绝不给你翻盘机会。'],
+      ['🧠','战术理解','你对时间线和刷钱路线有精确规划。花海的恐怖之处就在于他总能在正确的时间出现在正确的位置。'],
+      ['💪','心态素质','你自信甚至有些自负——这恰恰是顶级打野的必备特质。花海和Cat的传闻也从未影响他的表现。'],
+      ['🤝','团队协作','你虽是核心但懂得信任队友。花海的eStar之所以无敌，正因为他让整个团队围绕他的节奏运转。'],
+      ['📈','成长轨迹','你从出道就是天才，但你也懂得天才需要打磨。花海从新人到FMVP的路并不平坦，而你和他一样勇于扛起责任。'],
+    ]},
+  { min:36,max:40, emoji:'👑', player:'Fly',     title:'全能战神 · Fly',
+    desc:'你的属性最接近「Fly」——KPL历史第一人，八冠王、七届FMVP，前无古人后难有来者的传奇。你的打法全面而老辣，既有操作又有智慧。不管是花木兰的1v4反杀还是大场面的逆风翻盘，你永远是那个"你永远可以相信"的选手。',
+    analyses:[
+      ['🎮','游戏风格','你打法多样能攻能守，和Fly一样精通多种风格。花木兰到马超再到关羽，Fly证明了全能才是真正的天花板。'],
+      ['🧠','战术理解','你对比赛有超前的阅读能力，能预判对手的预判。八冠王的老辣就体现在这种"走一步看三步"的大局观上。'],
+      ['💪','心态素质','你是为大场面而生的选手。八冠七FMVP不是运气，而是无数次逆风翻盘打出来的。关键时刻你从不手抖。'],
+      ['🤝','团队协作','你在团队中既可以是核心也可以是绿叶。Fly在狼队的角色转换说明，真正的领袖根据团队需要调整自己。'],
+      ['📈','成长轨迹','天赋决定起点，努力决定终点。Fly打了这么多年依然是顶薪和历史第一人，靠的就是持续进化。八冠王说明一切。'],
+    ]},
+];
+
+
+/* ----- 45道题目 ----- */
+const QUESTIONS = [
+  //--- 游戏风格篇 (1-12) ---
+  { text:'在王者荣耀中你主玩哪个位置？', options:[
+    {label:'A',text:'中路，掌控全局输出',score:2},{label:'B',text:'发育路，后期接管比赛',score:3},
+    {label:'C',text:'打野，节奏发动机',score:5},{label:'D',text:'对抗路，单带一条路',score:4},
+    {label:'E',text:'游走辅助，队伍的眼睛',score:1}]},
+  { text:'你的对线风格是什么？', options:[
+    {label:'A',text:'稳住发育，等队友支援',score:1},{label:'B',text:'压线换血，打压制',score:4},
+    {label:'C',text:'找机会单杀',score:5},{label:'D',text:'清完线就去游走',score:3},
+    {label:'E',text:'看对面是谁再决定',score:2}]},
+  { text:'打团时你更倾向于？', options:[
+    {label:'A',text:'先手开团，带起节奏',score:5},{label:'B',text:'后手进场收割',score:4},
+    {label:'C',text:'保护后排打输出',score:2},{label:'D',text:'侧面切入切C位',score:3},
+    {label:'E',text:'拉扯反打不着急',score:1}]},
+  { text:'逆风局时你的第一反应是？', options:[
+    {label:'A',text:'稳住，拖后期有机会',score:2},{label:'B',text:'找机会抓单翻盘',score:5},
+    {label:'C',text:'守家清线别浪',score:1},{label:'D',text:'发信号组织反击',score:3},
+    {label:'E',text:'换一种思路打运营',score:4}]},
+  { text:'你更认同哪种赢比赛的方式？', options:[
+    {label:'A',text:'运营致胜，兵线推塔',score:2},{label:'B',text:'打架致胜，团灭对手',score:5},
+    {label:'C',text:'抓单致胜，逐个击破',score:4},{label:'D',text:'推塔致胜，抱团推进',score:3},
+    {label:'E',text:'防守反击，等对手失误',score:1}]},
+  { text:'你最喜欢用什么类型的英雄？', options:[
+    {label:'A',text:'法刺，一套秒人',score:4},{label:'B',text:'坦克前排，能抗能打',score:2},
+    {label:'C',text:'节奏打野，带飞全场',score:5},{label:'D',text:'射手大核，后期接管',score:3},
+    {label:'E',text:'功能型，控制拉满',score:1}]},
+  { text:'你怎么看待"单杀"对面？', options:[
+    {label:'A',text:'能单杀绝不叫人',score:5},{label:'B',text:'能杀就行，单不单杀无所谓',score:3},
+    {label:'C',text:'单杀是最爽的',score:4},{label:'D',text:'单杀有风险，还是稳点',score:2},
+    {label:'E',text:'团队胜利比单杀重要',score:1}]},
+  { text:'你更擅长哪种比赛节奏？', options:[
+    {label:'A',text:'慢节奏，逐步蚕食',score:1},{label:'B',text:'快节奏，滚雪球碾压',score:5},
+    {label:'C',text:'变速节奏，打乱对手',score:4},{label:'D',text:'防守节奏，等待机会',score:2},
+    {label:'E',text:'均衡节奏，该快则快',score:3}]},
+  { text:'你通常会如何选择进攻时机？', options:[
+    {label:'A',text:'等对面失误再上',score:2},{label:'B',text:'技能CD好就上',score:4},
+    {label:'C',text:'看队友状态跟上',score:3},{label:'D',text:'自己创造机会上',score:5},
+    {label:'E',text:'稳住，等打野信号',score:1}]},
+  { text:'你对"版本英雄"的态度是？', options:[
+    {label:'A',text:'必须练，版本答案',score:3},{label:'B',text:'无所谓，本命英雄最强',score:5},
+    {label:'C',text:'参考但不盲从',score:2},{label:'D',text:'研究透了再用',score:4},
+    {label:'E',text:'看比赛学职业选手',score:1}]},
+  { text:'你更看重个人操作还是团队配合？', options:[
+    {label:'A',text:'个人操作决定上限',score:5},{label:'B',text:'团队配合更重要',score:1},
+    {label:'C',text:'两者缺一不可',score:3},{label:'D',text:'操作好才有资格谈配合',score:4},
+    {label:'E',text:'看具体阵容和局势',score:2}]},
+  { text:'比赛失利后你通常会？', options:[
+    {label:'A',text:'复盘自己哪里没打好',score:2},{label:'B',text:'队友的问题，不想了',score:5},
+    {label:'C',text:'心态崩了但嘴上不说',score:4},{label:'D',text:'开下一把找回场子',score:3},
+    {label:'E',text:'休息一下调整心态',score:1}]},
+  //--- 性格特质篇 (13-22) ---
+  { text:'你在生活中的决策风格是？', options:[
+    {label:'A',text:'反复权衡，慎重决定',score:2},{label:'B',text:'直觉驱动，快刀斩乱麻',score:5},
+    {label:'C',text:'分析利弊再下手',score:3},{label:'D',text:'随缘，看心情',score:1},
+    {label:'E',text:'请教信任的人后再定',score:4}]},
+  { text:'面对压力你通常的表现是？', options:[
+    {label:'A',text:'越压越兴奋，发挥更好',score:5},{label:'B',text:'会紧张但不影响表现',score:4},
+    {label:'C',text:'尽量保持正常发挥',score:3},{label:'D',text:'容易失误，需要调整',score:2},
+    {label:'E',text:'直接摆烂逃避压力',score:1}]},
+  { text:'你如何看待"天赋"和"努力"？', options:[
+    {label:'A',text:'天赋决定天花板',score:5},{label:'B',text:'努力一定可以弥补天赋',score:2},
+    {label:'C',text:'天赋+努力=成功',score:3},{label:'D',text:'天赋重要但努力才是根本',score:4},
+    {label:'E',text:'看行业，打游戏天赋很重要',score:1}]},
+  { text:'你更相信直觉还是经验？', options:[
+    {label:'A',text:'直觉，第一反应最准',score:5},{label:'B',text:'经验，走过的路不会错',score:2},
+    {label:'C',text:'直觉判断+经验验证',score:4},{label:'D',text:'看情况，两者都用',score:3},
+    {label:'E',text:'别人怎么说我就怎么做',score:1}]},
+  { text:'你如何看待失败？', options:[
+    {label:'A',text:'失败是成功之母',score:2},{label:'B',text:'失败说明我不够强',score:5},
+    {label:'C',text:'分析原因避免再犯',score:3},{label:'D',text:'不甘心，要赢回来',score:4},
+    {label:'E',text:'没什么大不了的',score:1}]},
+  { text:'你在团队中通常扮演的角色是？', options:[
+    {label:'A',text:'指挥者，定方向',score:4},{label:'B',text:'核心C位，带节奏',score:5},
+    {label:'C',text:'执行者，指哪打哪',score:2},{label:'D',text:'协调者，调和矛盾',score:3},
+    {label:'E',text:'气氛组，活跃气氛',score:1}]},
+  { text:'你如何对待别人的批评？', options:[
+    {label:'A',text:'客观接受，有则改之',score:2},{label:'B',text:'不服，我的判断没错',score:5},
+    {label:'C',text:'表面听心里不服',score:4},{label:'D',text:'选择性听取',score:3},
+    {label:'E',text:'很在意，容易受影响',score:1}]},
+  { text:'你的学习方式是？', options:[
+    {label:'A',text:'看高手怎么玩然后模仿',score:3},{label:'B',text:'自己摸索，不按套路',score:5},
+    {label:'C',text:'系统学习逐步提升',score:2},{label:'D',text:'实战中边打边学',score:4},
+    {label:'E',text:'懒得学，靠天赋吃饭',score:1}]},
+  { text:'你的人生信条更接近？', options:[
+    {label:'A',text:'稳住，我们能赢',score:1},{label:'B',text:'无限猖狂，不狂怎么赢',score:5},
+    {label:'C',text:'可以输但不能怂',score:4},{label:'D',text:'努力的人运气不会差',score:2},
+    {label:'E',text:'相信自己，相信队友',score:3}]},
+  { text:'如果用一个词形容你自己的性格？', options:[
+    {label:'A',text:'沉稳',score:1},{label:'B',text:'狂傲',score:5},{label:'C',text:'自信',score:4},
+    {label:'D',text:'靠谱',score:2},{label:'E',text:'随性',score:3}]},
+  //--- KPL知识&梗篇 (23-40) ---
+  { text:'"无限猖狂"这个梗最初说的是谁？', options:[
+    {label:'A',text:'花海，节奏狂魔',score:4},{label:'B',text:'小胖，从胖皇到胖大将军',score:5},
+    {label:'C',text:'Fly，老将不死',score:2},{label:'D',text:'九尾，尾子哥的自信',score:3},
+    {label:'E',text:'一诺，天才射手',score:1}]},
+  { text:'"万物皆可辅"是KPL哪位的名言？', options:[
+    {label:'A',text:'子阳，辅助之神',score:1},{label:'B',text:'帆帆，团队大脑',score:3},
+    {label:'C',text:'Cat，老将转型',score:2},{label:'D',text:'爱思，全能辅助',score:4},
+    {label:'E',text:'看不懂这个梗',score:5}]},
+  { text:'你知道花海和Cat之间有什么说法吗？', options:[
+    {label:'A',text:'好兄弟，感情很好',score:1},{label:'B',text:'表面和气但有矛盾传闻',score:4},
+    {label:'C',text:'有过争执但现在好了',score:3},{label:'D',text:'完全不了解',score:2},
+    {label:'E',text:'这些八卦不重要',score:5}]},
+  { text:'你最喜欢的KPL战队是哪个？', options:[
+    {label:'A',text:'重庆狼队',score:3},{label:'B',text:'武汉eStarPro',score:4},
+    {label:'C',text:'成都AG超玩会',score:2},{label:'D',text:'北京WB',score:5},
+    {label:'E',text:'广州TTG或JDG',score:1}]},
+  { text:'你最喜欢的战队配色是？', options:[
+    {label:'A',text:'狼队红黑',score:3},{label:'B',text:'eStar蓝白',score:4},
+    {label:'C',text:'AG红白',score:2},{label:'D',text:'Hero黑金',score:5},
+    {label:'E',text:'TTG蓝白或DYG蓝',score:1}]},
+  { text:'"26连败"说的是哪个战队？', options:[
+    {label:'A',text:'AG超玩会，那段黑暗历史',score:2},{label:'B',text:'EDG.M，曾经的黄埔军校',score:5},
+    {label:'C',text:'RW侠',score:1},{label:'D',text:'VG',score:3},
+    {label:'E',text:'不知道这个梗',score:4}]},
+  { text:'Fly用哪个英雄拿下了他的首个FMVP皮肤？', options:[
+    {label:'A',text:'花木兰',score:5},{label:'B',text:'曜',score:4},
+    {label:'C',text:'马超',score:3},{label:'D',text:'关羽',score:2},
+    {label:'E',text:'铠',score:1}]},
+  { text:'解说口中喊"这就是KPL"通常伴随什么场面？', options:[
+    {label:'A',text:'一波完美的团战',score:3},{label:'B',text:'绝境翻盘的名场面',score:4},
+    {label:'C',text:'选手极限操作',score:5},{label:'D',text:'双方经济差不大的情况下',score:2},
+    {label:'E',text:'解说自己在嗨',score:1}]},
+  { text:'你怎么看待KPL选手频繁转会？', options:[
+    {label:'A',text:'很正常，商业联盟',score:3},{label:'B',text:'频繁转会说明不忠诚',score:1},
+    {label:'C',text:'选手有权利选择更好的',score:4},{label:'D',text:'转会才有新鲜感',score:5},
+    {label:'E',text:'会破坏团队默契',score:2}]},
+  { text:'你更支持选手个人还是战队？', options:[
+    {label:'A',text:'选手个人，看他去哪我去哪',score:5},{label:'B',text:'战队粉，队魂永存',score:2},
+    {label:'C',text:'选手和战队一起支持',score:3},{label:'D',text:'谁强就支持谁',score:4},
+    {label:'E',text:'只看比赛不粉人',score:1}]},
+  { text:'你怎么看"巅峰赛第一"在KPL的地位？', options:[
+    {label:'A',text:'巅峰赛强不代表比赛强',score:2},{label:'B',text:'巅峰赛第一起码有天赋',score:3},
+    {label:'C',text:'顶级选手巅峰赛必然强',score:5},{label:'D',text:'路人王和职业是两回事',score:1},
+    {label:'E',text:'说明有操作潜力',score:4}]},
+  { text:'你觉得KPL里哪个选手的经历最打动你？', options:[
+    {label:'A',text:'Fly，六年六冠的老将',score:3},{label:'B',text:'Cat，从辅助再出发',score:4},
+    {label:'C',text:'梦泪，AG的信仰',score:2},{label:'D',text:'暖阳，从少年到FMVP',score:5},
+    {label:'E',text:'一诺，天才的下坠与重生',score:1}]},
+  { text:'"老将不死"这个说法让你想到？', options:[
+    {label:'A',text:'Fly，还在巅峰',score:3},{label:'B',text:'Cat，从中单到辅助仍在打',score:4},
+    {label:'C',text:'梦泪，虽退役但传奇永存',score:2},{label:'D',text:'无痕，初代KPL的活化石',score:5},
+    {label:'E',text:'Gemini教练',score:1}]},
+  { text:'你最喜欢看哪种类型的比赛？', options:[
+    {label:'A',text:'运营拉满的顶级博弈',score:2},{label:'B',text:'打架到底的肉搏战',score:5},
+    {label:'C',text:'绝境翻盘的逆风局',score:4},{label:'D',text:'双方法核的华丽对决',score:3},
+    {label:'E',text:'有梗的欢乐局',score:1}]},
+  { text:'你觉得一诺的"一诺千金"和"一诺犯病"哪个更贴切？', options:[
+    {label:'A',text:'一诺千金的时候多',score:3},{label:'B',text:'一半一半吧',score:2},
+    {label:'C',text:'犯病的时候更有节目效果',score:5},{label:'D',text:'一诺就是AG的灵魂',score:4},
+    {label:'E',text:'不关注AG不清楚',score:1}]},
+  { text:'哪一句话最像你的游戏态度？', options:[
+    {label:'A',text:'稳住能赢',score:1},{label:'B',text:'干就完了',score:5},
+    {label:'C',text:'运营为王',score:2},{label:'D',text:'相信自己相信队友',score:4},
+    {label:'E',text:'输赢随缘心态不崩',score:3}]},
+  { text:'你印象最深的KPL名场面是？', options:[
+    {label:'A',text:'Fly花木兰1v4反杀',score:4},{label:'B',text:'梦泪韩信偷家',score:2},
+    {label:'C',text:'小胖赵云七进七出',score:5},{label:'D',text:'花海澜秀翻全场',score:3},
+    {label:'E',text:'坦然吕布跳大三杀',score:1}]},
+  { text:'清融转会到JDG后你什么看法？', options:[
+    {label:'A',text:'好马配好鞍,JDG起飞',score:4},{label:'B',text:'离开eStar是对的',score:5},
+    {label:'C',text:'可惜了eStar的王朝',score:2},{label:'D',text:'看表现再说',score:3},
+    {label:'E',text:'清融去哪都是顶薪',score:1}]},
+  //--- 综合偏好篇 (41-45) ---
+  { text:'如果你能拥有一名KPL选手的能力，你选？', options:[
+    {label:'A',text:'清融的意识和操作',score:2},{label:'B',text:'花海的节奏和侵略性',score:4},
+    {label:'C',text:'小胖的自信和创造力',score:5},{label:'D',text:'Fly的全能和经验',score:3},
+    {label:'E',text:'坦然的稳重和抗压',score:1}]},
+  { text:'你觉得自己更像哪种类型的选手？', options:[
+    {label:'A',text:'天赋型，出道即巅峰',score:5},{label:'B',text:'努力型，勤能补拙',score:1},
+    {label:'C',text:'团队型，成全是核心',score:2},{label:'D',text:'领袖型，带队冲锋',score:4},
+    {label:'E',text:'全能型，什么都会',score:3}]},
+  { text:'你更想做赛场上的哪种角色？', options:[
+    {label:'A',text:'聚光灯下的明星选手',score:5},{label:'B',text:'幕后默默付出的团队基石',score:1},
+    {label:'C',text:'关键时刻站出来的大心脏',score:4},{label:'D',text:'队伍的指挥官',score:3},
+    {label:'E',text:'稳定发挥的六边形战士',score:2}]},
+  { text:'你有自己的本命英雄吗？TA的特点是？', options:[
+    {label:'A',text:'操作上限高，秀就完了',score:5},{label:'B',text:'简单粗暴，稳得一批',score:1},
+    {label:'C',text:'有控制有输出，全能',score:3},{label:'D',text:'节奏型，带飞全场',score:4},
+    {label:'E',text:'后期大核，翻盘利器',score:2}]},
+  { text:'最后一题：你觉得自己最像KPL的哪类人？', options:[
+    {label:'A',text:'操作拉满的明星选手',score:5},{label:'B',text:'专注战术的幕后教练',score:2},
+    {label:'C',text:'死忠粉，永远支持',score:1},{label:'D',text:'天赋异禀的路人王',score:4},
+    {label:'E',text:'全能型的六边形战士',score:3}]},
+];
+
+/* ===============================================================
+   应用状态
+   =============================================================== */
+const state = { currentQ:0, answers:new Array(45).fill(null), isTransitioning:false };
+
+
+function showPage(id){
+  ['page-start','page-quiz','page-result'].forEach(p=>document.getElementById(p).classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0});
+}
+
+(function init(){
+  document.getElementById('test-title').textContent = TEST_TITLE;
+  document.getElementById('test-subtitle').textContent = TEST_SUBTITLE;
+  document.getElementById('info-total-q').textContent = 45;
+})();
+
+function startQuiz(){
+  state.currentQ = 0;
+  state.answers = new Array(45).fill(null);
+  state.isTransitioning = false;
+  showPage('page-quiz');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const idx = state.currentQ, q = QUESTIONS[idx], total = 45;
+  const pct = Math.round((idx / total) * 100);
+  document.getElementById('progress-label').textContent = `第 ${idx+1} / ${total} 题`;
+  document.getElementById('progress-pct').textContent = `${pct}%`;
+  document.getElementById('progress-fill').style.width = `${pct}%`;
+  document.getElementById('q-number').textContent = `第 ${idx+1} 题`;
+  document.getElementById('q-text').textContent = q.text;
+  const list = document.getElementById('q-options');
+  list.innerHTML = '';
+  const labels = ['A','B','C','D','E'];
+  q.options.forEach((opt,i)=>{
+    const li = document.createElement('li');
+    li.className = 'option-item';
+    if(state.answers[idx]===opt.score) li.classList.add('selected');
+    li.innerHTML = `<span class="option-label">${labels[i]}</span><span>${opt.text}</span>`;
+    li.dataset.score = opt.score;
+    li.addEventListener('click', ()=>selectOption(li, opt.score));
+    list.appendChild(li);
+  });
+  const card = document.getElementById('question-card');
+  card.style.animation = 'none'; void card.offsetHeight;
+  card.style.animation = 'fadeSlideIn 0.5s ease';
+}
+
+function selectOption(el, score){
+  if(state.isTransitioning) return;
+  const idx = state.currentQ;
+  document.querySelectorAll('#q-options .option-item').forEach(item=>item.classList.remove('selected'));
+  el.classList.add('selected');
+  state.answers[idx] = score;
+  if(idx === 45-1){
+    state.isTransitioning = true;
+    document.getElementById('progress-pct').textContent = '100%';
+    document.getElementById('progress-fill').style.width = '100%';
+    setTimeout(showResult, 600);
+    return;
+  }
+  state.isTransitioning = true;
+  setTimeout(()=>{ state.currentQ++; state.isTransitioning=false; renderQuestion(); }, 400);
+}
+
+function showResult(){
+  const rawTotal = state.answers.reduce((s,v)=>s+(v||1), 0);
+  const minRaw = 45 * 1;
+  const maxRaw = 45 * 5;
+  const normalized = Math.round((rawTotal - minRaw) / (maxRaw - minRaw) * 40);
+  let tier = RESULT_TIERS.find(t => normalized>=t.min && normalized<=t.max);
+  if(!tier) tier = RESULT_TIERS[RESULT_TIERS.length-1];
+
+  document.getElementById('r-emoji').textContent = tier.emoji;
+  document.getElementById('r-player').textContent = tier.player;
+  document.getElementById('r-title').textContent = tier.title;
+  document.getElementById('r-desc').textContent = tier.desc;
+  document.getElementById('r-score').textContent = normalized;
+  document.getElementById('r-tier-label').textContent = tier.title.split('·')[1]||tier.title;
+
+  const list = document.getElementById('analysis-list');
+  list.innerHTML = '';
+  tier.analyses.forEach(a=>{
+    const div = document.createElement('div');
+    div.className = 'analysis-item';
+    div.innerHTML = `<span class="dim-icon">${a[0]}</span><div class="dim-content"><div class="dim-name">${a[1]}</div><div class="dim-text">${a[2]}</div></div>`;
+    list.appendChild(div);
+  });
+
+  showPage('page-result');
+  fireConfetti();
+}
+
+function fireConfetti(){
+  const icons = ['⚡','🏆','🔥','🎮','👑','💪','🌟','🎯','🚀','💎'];
+  const container = document.createElement('div');
+  container.className = 'confetti-container';
+  document.body.appendChild(container);
+  for(let i=0;i<60;i++){
+    const p = document.createElement('div');
+    p.className = 'confetti-piece';
+    p.textContent = icons[i%icons.length];
+    p.style.left = Math.random()*100+'%';
+    p.style.fontSize = (16+Math.random()*18)+'px';
+    p.style.animationDuration = (2.5+Math.random()*3)+'s';
+    p.style.animationDelay = Math.random()*2+'s';
+    container.appendChild(p);
+  }
+  setTimeout(()=>{ if(container.parentNode) container.parentNode.removeChild(container); }, 8000);
+}
+
+function shareResult(){
+  const player = document.getElementById('r-player').textContent;
+  const title = document.getElementById('r-title').textContent;
+  const text = `我测出了我的KPL分身是【${player}】- ${title}！你也来试试吧 🎮`;
+  if(navigator.share){
+    navigator.share({title:'KPL选手匹配测试',text:text,url:window.location.href});
+  } else {
+    navigator.clipboard.writeText(text).then(()=>alert('📋 结果已复制，分享给朋友吧！'));
+  }
+}
+
+function restartQuiz(){
+  state.currentQ = 0;
+  state.answers = new Array(45).fill(null);
+  state.isTransitioning = false;
+  document.getElementById('progress-fill').style.width = '0%';
+  document.getElementById('progress-pct').textContent = '0%';
+  showPage('page-start');
+}
+
+
+// 按钮事件绑定（addEventListener）
+document.getElementById('btn-start-q').addEventListener('click', startQuiz);
+document.getElementById('btn-restart-q').addEventListener('click', restartQuiz);
+document.getElementById('btn-share-q').addEventListener('click', shareResult);
+</script>
+</body>
+</html>
